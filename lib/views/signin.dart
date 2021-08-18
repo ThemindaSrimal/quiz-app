@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizapp/views/singup.dart';
 import 'package:quizapp/widgets/widgets.dart';
 
 class SignIn extends StatefulWidget {
@@ -70,15 +71,24 @@ class _SignInState extends State<SignIn> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       "Don't have an account? ",
                       style: TextStyle(fontSize: 15.5),
                     ),
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                          fontSize: 15.5, decoration: TextDecoration.underline),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUp()));
+                      },
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                            fontSize: 15.5,
+                            decoration: TextDecoration.underline),
+                      ),
                     ),
                   ],
                 ),
