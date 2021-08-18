@@ -25,7 +25,9 @@ class _SignInState extends State<SignIn> {
           brightness: Brightness.light,
         ),
         body: Form(
+          key: _formKey,
           child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
                 const Spacer(),
@@ -51,7 +53,37 @@ class _SignInState extends State<SignIn> {
                   },
                 ),
                 const SizedBox(
-                  height: 6,
+                  height: 24,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(30)),
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width - 48,
+                  child: const Text('Sign in',
+                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "Don't have an account? ",
+                      style: TextStyle(fontSize: 15.5),
+                    ),
+                    Text(
+                      'Sign Up',
+                      style: TextStyle(
+                          fontSize: 15.5, decoration: TextDecoration.underline),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 80,
                 ),
               ],
             ),
