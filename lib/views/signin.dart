@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizapp/services/auth.dart';
 import 'package:quizapp/views/singup.dart';
 import 'package:quizapp/widgets/widgets.dart';
+import 'home.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -15,11 +16,24 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   late String email, password;
-  AuthService authservice = new AuthService();
+  // ignore: unnecessary_new
+  AuthService authService = new AuthService();
+  bool isLoading = false;
 
   signIn() async {
     if (_formKey.currentState!.validate()) {
-      await authservice.signInEmailAndPass(email, password);
+      setState(() {
+        isLoading = true;
+      });
+      await authService.signInEmailAndPass(email, password).then((val) {
+        if (val != null) {
+          setState(() {
+            isLoading = false;
+          });
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => const Home()));
+        }
+      });
     }
   }
 
@@ -33,85 +47,91 @@ class _SignInState extends State<SignIn> {
           // ignore: deprecated_member_use
           brightness: Brightness.light,
         ),
-        body: Form(
-          key: _formKey,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                const Spacer(),
-                TextFormField(
-                  validator: (val) {
-                    return val!.isEmpty ? 'Enter Email' : null;
-                  },
-                  decoration: const InputDecoration(hintText: 'Email'),
-                  onChanged: (val) {
-                    email = val;
-                  },
+        body: isLoading
+            // ignore: avoid_unnecessary_containers
+            ? Container(
+                child: const Center(
+                  child: CircularProgressIndicator(),
                 ),
-                const SizedBox(
-                  height: 6,
-                ),
-                TextFormField(
-                  validator: (val) {
-                    return val!.isEmpty ? 'Enter Password' : null;
-                  },
-                  decoration: const InputDecoration(hintText: 'Password'),
-                  onChanged: (val) {
-                    password = val;
-                  },
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // ignore: prefer_const_constructors
-                    SignIn();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(30)),
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width - 48,
-                    child: const Text('Sign in',
-                        style: TextStyle(color: Colors.white, fontSize: 16)),
+              )
+            : Form(
+                key: _formKey,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      TextFormField(
+                        validator: (val) {
+                          return val!.isEmpty ? 'Enter Email' : null;
+                        },
+                        decoration: const InputDecoration(hintText: 'Email'),
+                        onChanged: (val) {
+                          email = val;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        validator: (val) {
+                          return val!.isEmpty ? 'Enter Password' : null;
+                        },
+                        decoration: const InputDecoration(hintText: 'Password'),
+                        onChanged: (val) {
+                          password = val;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      GestureDetector(
+                        onTap : () => signIn(),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(30)),
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width - 48,
+                          child: const Text('Sign in',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16)),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 18,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Don't have an account? ",
+                            style: TextStyle(fontSize: 15.5),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const SignUp()));
+                            },
+                            child: const Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                  fontSize: 15.5,
+                                  decoration: TextDecoration.underline),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 80,
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 18,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Don't have an account? ",
-                      style: TextStyle(fontSize: 15.5),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignUp()));
-                      },
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            fontSize: 15.5,
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 80,
-                ),
-              ],
-            ),
-          ),
-        ));
+              ));
   }
 }
