@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizapp/services/auth.dart';
 import 'package:quizapp/views/singup.dart';
 import 'package:quizapp/widgets/widgets.dart';
 
@@ -14,6 +15,13 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   late String email, password;
+  AuthService authservice = new AuthService();
+
+  signIn() async {
+    if (_formKey.currentState!.validate()) {
+      await authservice.signInEmailAndPass(email, password);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,15 +64,21 @@ class _SignInState extends State<SignIn> {
                 const SizedBox(
                   height: 24,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 18),
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(30)),
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width - 48,
-                  child: const Text('Sign in',
-                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                GestureDetector(
+                  onTap: () {
+                    // ignore: prefer_const_constructors
+                    SignIn();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(30)),
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width - 48,
+                    child: const Text('Sign in',
+                        style: TextStyle(color: Colors.white, fontSize: 16)),
+                  ),
                 ),
                 const SizedBox(
                   height: 18,
