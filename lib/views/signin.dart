@@ -87,7 +87,7 @@ class _SignInState extends State<SignIn> {
                         height: 24,
                       ),
                       GestureDetector(
-                        onTap : () => signIn(),
+                        onTap: () => signIn(),
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 18),
                           decoration: BoxDecoration(
