@@ -102,17 +102,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       GestureDetector(
                         onTap: () => signUp(),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 18),
-                          decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(30)),
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width - 48,
-                          child: const Text('Sign Up',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                        ),
+                        child: blueButton(context, 'Sign Up'),
                       ),
                       const SizedBox(
                         height: 18,
