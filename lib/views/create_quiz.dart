@@ -27,6 +27,7 @@ class _CreateQuizState extends State<CreateQuiz> {
           key: _formKey,
           // ignore: avoid_unnecessary_containers
           child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               // ignore: prefer_const_literals_to_create_immutables
               children: [
@@ -65,7 +66,11 @@ class _CreateQuizState extends State<CreateQuiz> {
                     quizDescription = val;
                   },
                 ),
-                const Spacer()
+                const Spacer(),
+                blueButton(context, 'Create Quiz'),
+                const SizedBox(
+                  height: 60,
+                ),
               ],
             ),
           ),
