@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_unnecessary_containers, unused_field, prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:quizapp/widgets/widgets.dart';
 
 class AddQuestion extends StatefulWidget {
   const AddQuestion({Key? key}) : super(key: key);
@@ -8,8 +11,84 @@ class AddQuestion extends StatefulWidget {
 }
 
 class _AddQuestionState extends State<AddQuestion> {
+  final _formKey = GlobalKey<FormState>();
+  late String question, option1, option2, option3, option4;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+        appBar: AppBar(
+          title: Center(child: appBar(context)),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          iconTheme: const IconThemeData(color: Colors.black87),
+          // ignore: deprecated_member_use
+          brightness: Brightness.dark,
+        ),
+        body: Container(
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: [
+                TextFormField(
+                  validator: (val) {
+                    return val!.isEmpty ? 'Enter Question' : null;
+                  },
+                  decoration: const InputDecoration(hintText: 'Question'),
+                  onChanged: (val) {
+                    question = val;
+                  },
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                TextFormField(
+                  validator: (val) {
+                    return val!.isEmpty ? 'Enter Option1' : null;
+                  },
+                  decoration: const InputDecoration(
+                      hintText: 'Option1 (Correct Answer)'),
+                  onChanged: (val) {
+                    option1 = val;
+                  },
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                TextFormField(
+                  validator: (val) {
+                    return val!.isEmpty ? 'Enter Option2' : null;
+                  },
+                  decoration: const InputDecoration(hintText: 'Option2'),
+                  onChanged: (val) {
+                    option1 = val;
+                  },
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                TextFormField(
+                  validator: (val) {
+                    return val!.isEmpty ? 'Enter Option3' : null;
+                  },
+                  decoration: const InputDecoration(hintText: 'Option3'),
+                  onChanged: (val) {
+                    option3 = val;
+                  },
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                TextFormField(
+                  validator: (val) {
+                    return val!.isEmpty ? 'Enter Option4' : null;
+                  },
+                  decoration: const InputDecoration(hintText: 'Option4'),
+                  onChanged: (val) {
+                    option4 = val;
+                  },
+                ),
+                Spacer(),
+              ],
+            )));
   }
 }
