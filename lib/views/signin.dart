@@ -88,7 +88,7 @@ class _SignInState extends State<SignIn> {
                       ),
                       GestureDetector(
                         onTap: () => signIn(),
-                        child: blueButton(context, 'Sign In'),
+                        child: blueButton(context: context, label: 'Sign In'),
                       ),
                       const SizedBox(
                         height: 18,

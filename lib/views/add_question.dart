@@ -14,6 +14,8 @@ class _AddQuestionState extends State<AddQuestion> {
   final _formKey = GlobalKey<FormState>();
   late String question, option1, option2, option3, option4;
 
+  uploadQuizData() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,6 +90,31 @@ class _AddQuestionState extends State<AddQuestion> {
                   },
                 ),
                 Spacer(),
+                Row(
+                  children: [
+                    blueButton(
+                        context: context,
+                        label: 'Submit',
+                        buttonWidth:
+                            MediaQuery.of(context).size.width / 2 - 36),
+                    SizedBox(
+                      width: 24,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        //todo
+                      },
+                      child: blueButton(
+                          context: context,
+                          label: 'Add Question',
+                          buttonWidth:
+                              MediaQuery.of(context).size.width / 2 - 36),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 50,
+                ),
               ],
             )));
   }

@@ -113,7 +113,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                           onTap: () {
                             createQuizOnline();
                           },
-                          child: blueButton(context, 'Create Quiz')),
+                          child: blueButton(
+                              context: context, label: 'Create Quiz')),
                       const SizedBox(
                         height: 60,
                       ),
