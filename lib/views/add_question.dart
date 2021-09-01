@@ -52,105 +52,108 @@ class _AddQuestionState extends State<AddQuestion> {
           // ignore: deprecated_member_use
           brightness: Brightness.dark,
         ),
-        body: _isLoading
-            ? Container(
-                child: Center(
-                child: CircularProgressIndicator(),
-              ))
-            : Container(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      validator: (val) {
-                        return val!.isEmpty ? 'Enter Question' : null;
-                      },
-                      decoration: const InputDecoration(hintText: 'Question'),
-                      onChanged: (val) {
-                        question = val;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    TextFormField(
-                      validator: (val) {
-                        return val!.isEmpty ? 'Enter Option1' : null;
-                      },
-                      decoration: const InputDecoration(
-                          hintText: 'Option1 (Correct Answer)'),
-                      onChanged: (val) {
-                        option1 = val;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    TextFormField(
-                      validator: (val) {
-                        return val!.isEmpty ? 'Enter Option2' : null;
-                      },
-                      decoration: const InputDecoration(hintText: 'Option2'),
-                      onChanged: (val) {
-                        option1 = val;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    TextFormField(
-                      validator: (val) {
-                        return val!.isEmpty ? 'Enter Option3' : null;
-                      },
-                      decoration: const InputDecoration(hintText: 'Option3'),
-                      onChanged: (val) {
-                        option3 = val;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    TextFormField(
-                      validator: (val) {
-                        return val!.isEmpty ? 'Enter Option4' : null;
-                      },
-                      decoration: const InputDecoration(hintText: 'Option4'),
-                      onChanged: (val) {
-                        option4 = val;
-                      },
-                    ),
-                    Spacer(),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: blueButton(
-                              context: context,
-                              label: 'Submit',
-                              buttonWidth:
-                                  MediaQuery.of(context).size.width / 2 - 36),
-                        ),
-                        SizedBox(
-                          width: 24,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            uploadQuestionData();
-                          },
-                          child: blueButton(
-                              context: context,
-                              label: 'Add Question',
-                              buttonWidth:
-                                  MediaQuery.of(context).size.width / 2 - 36),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                  ],
-                )));
+        body: Form(
+          key: _formKey,
+          child: _isLoading
+              ? Container(
+                  child: Center(
+                  child: CircularProgressIndicator(),
+                ))
+              : Container(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (val) {
+                          return val!.isEmpty ? 'Enter Question' : null;
+                        },
+                        decoration: const InputDecoration(hintText: 'Question'),
+                        onChanged: (val) {
+                          question = val;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return val!.isEmpty ? 'Enter Option1' : null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Option1 (Correct Answer)'),
+                        onChanged: (val) {
+                          option1 = val;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return val!.isEmpty ? 'Enter Option2' : null;
+                        },
+                        decoration: const InputDecoration(hintText: 'Option2'),
+                        onChanged: (val) {
+                          option2 = val;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return val!.isEmpty ? 'Enter Option3' : null;
+                        },
+                        decoration: const InputDecoration(hintText: 'Option3'),
+                        onChanged: (val) {
+                          option3 = val;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return val!.isEmpty ? 'Enter Option4' : null;
+                        },
+                        decoration: const InputDecoration(hintText: 'Option4'),
+                        onChanged: (val) {
+                          option4 = val;
+                        },
+                      ),
+                      Spacer(),
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: blueButton(
+                                context: context,
+                                label: 'Submit',
+                                buttonWidth:
+                                    MediaQuery.of(context).size.width / 2 - 36),
+                          ),
+                          SizedBox(
+                            width: 24,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              uploadQuestionData();
+                            },
+                            child: blueButton(
+                                context: context,
+                                label: 'Add Question',
+                                buttonWidth:
+                                    MediaQuery.of(context).size.width / 2 - 36),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                    ],
+                  )),
+        ));
   }
 }
