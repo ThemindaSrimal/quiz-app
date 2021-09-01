@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizapp/helper/functions.dart';
 import 'package:quizapp/services/auth.dart';
 import 'package:quizapp/views/singup.dart';
 import 'package:quizapp/widgets/widgets.dart';
@@ -30,6 +31,7 @@ class _SignInState extends State<SignIn> {
           setState(() {
             isLoading = false;
           });
+          HelperFunctions.saveUserLoggedInDetails(isLoggedIn: true);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => const Home()));
         }
